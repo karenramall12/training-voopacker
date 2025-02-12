@@ -2,12 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
-const port = 4000;
+const port = 5000;
 
 let videos = [];
 
 app.use(bodyParser.json());
 app.use(cors());
+
+app.get('/', (req, res) => {
+    res.send('Servidor está funcionando!');
+});
 
 app.get('/videos', (req, res) => {
     res.json(videos);

@@ -79,7 +79,7 @@ async function carregarVideos() {
 
         // Criar o iframe do vídeo
         const iframe = document.createElement('iframe');
-        iframe.src = video.link.replace("watch?v=", "embed/");
+        iframe.src = transformarLinkParaEmbed(video.link);
         iframe.height = "200";
         iframe.width = "100%";
         iframe.allowFullscreen = true;
@@ -102,9 +102,26 @@ async function carregarVideos() {
     });
 }
 
+// Função para transformar link do YouTube para embed
+function transformarLinkParaEmbed(link) {
+    try {
+        const url = new URL(link);
+        if (url.hostname === 'www.youtube.com' || url.hostname === 'youtube.com') {
+            const videoId = url.searchParams.get('v');
+            return `https://www.youtube.com/embed/${videoId}`;
+        } else if (url.hostname === 'youtu.be') {
+            const videoId = url.pathname.slice(1);
+            return `https://www.youtube.com/embed/${videoId}`;
+        }
+    } catch (e) {
+        console.error('Link inválido:', link);
+    }
+    return link; // Retorna o link original se não for do YouTube
+}
+
 // Função para excluir vídeo
 async function excluirVideo(videoCard, link) {
-    const response = await fetch('http://localhost:4000/videos', {
+    const response = await fetch('http://localhost:3000/videos', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ link })
