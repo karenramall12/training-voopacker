@@ -1,0 +1,113 @@
+/* Geral */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #141414;
+    color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header {
+    background-color: #E50914;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.container {
+    margin: 20px;
+    padding: 20px;
+}
+
+/* Estilo dos inputs e botão */
+input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #E50914;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #C10810;
+}
+
+/* Estilo dos vídeos */
+.videos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.video-card {
+    background: #222;
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+}
+
+.video-card iframe {
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+}
+
+/* Botão de excluir */
+.delete-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #222;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    text-align: center;
+}
+
+.close {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+/* Título do vídeo */
+.video-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #fff;
+    font-weight: bold;
+}
