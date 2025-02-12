@@ -29,7 +29,7 @@ function verificarSenha() {
 }
 
 // Função para adicionar vídeo
-function adicionarVideo() {
+async function adicionarVideo() {
     const titulo = document.getElementById('titulo').value;
     const link = document.getElementById('link').value;
 
@@ -73,8 +73,8 @@ function adicionarVideo() {
         // Adicionar o vídeo à lista de vídeos
         document.getElementById('videos').appendChild(videoCard);
 
-        // Salvar o vídeo no localStorage
-        salvarVideo({ titulo, link });
+        // Salvar o vídeo no servidor
+        await salvarVideo({ titulo, link });
 
         // Limpar os campos de entrada após adicionar o vídeo
         document.getElementById('titulo').value = '';
@@ -85,16 +85,21 @@ function adicionarVideo() {
     }
 }
 
-// Função para salvar vídeo no localStorage
-function salvarVideo(video) {
-    let videos = JSON.parse(localStorage.getItem('videos')) || [];
-    videos.push(video);
-    localStorage.setItem('videos', JSON.stringify(videos));
+// Função para salvar vídeo no servidor
+async function salvarVideo(video) {
+    await fetch('http://localhost:3000/videos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(video)
+    });
 }
 
 // Função para carregar vídeos ao carregar a página
-function carregarVideos() {
-    let videos = JSON.parse(localStorage.getItem('videos')) || [];
+async function carregarVideos() {
+    const response = await fetch('http://localhost:3000/videos');
+    const videos = await response.json();
 
     videos.forEach(video => {
         const videoCard = document.createElement('div');
@@ -139,11 +144,15 @@ function carregarVideos() {
 }
 
 // Função para excluir vídeo
-function excluirVideo(videoCard, link) {
+async function excluirVideo(videoCard, link) {
     videoCard.remove();
-    let videos = JSON.parse(localStorage.getItem('videos')) || [];
-    videos = videos.filter(video => video.link !== link);
-    localStorage.setItem('videos', JSON.stringify(videos));
+    await fetch('http://localhost:3000/videos', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ link })
+    });
 }
 
 // Função para marcar o vídeo como assistido
