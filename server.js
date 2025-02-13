@@ -14,18 +14,21 @@ app.get('/', (req, res) => {
 });
 
 app.get('/videos', (req, res) => {
+    console.log('GET /videos');
     res.json(videos);
 });
 
 app.post('/videos', (req, res) => {
     const video = req.body;
     videos.push(video);
+    console.log('POST /videos', video);
     res.status(201).json(video);
 });
 
 app.delete('/videos', (req, res) => {
     const { link } = req.body;
     videos = videos.filter(video => video.link !== link);
+    console.log('DELETE /videos', link);
     res.status(204).send();
 });
 
