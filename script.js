@@ -41,7 +41,7 @@ async function adicionarVideo() {
         const videoData = { titulo, link };
 
         // Salvar o vídeo no servidor
-        const response = await fetch('http://localhost:3000/videos', {
+        const response = await fetch('http://192.168.15.24:6000/videos', { // Substitua pelo endereço IP do servidor
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(videoData)
@@ -62,7 +62,7 @@ async function adicionarVideo() {
 
 // Função para carregar vídeos
 async function carregarVideos() {
-    const response = await fetch('http://localhost:3000/videos');
+    const response = await fetch('http://192.168.15.24:6000/videos'); // Substitua pelo endereço IP do servidor
     const videos = await response.json();
 
     const videoContainer = document.getElementById('videos');
@@ -121,7 +121,7 @@ function transformarLinkParaEmbed(link) {
 
 // Função para excluir vídeo
 async function excluirVideo(videoCard, link) {
-    const response = await fetch('http://localhost:3000/videos', {
+    const response = await fetch('http://192.168.15.24:6000/videos', { // Substitua pelo endereço IP do servidor
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ link })
